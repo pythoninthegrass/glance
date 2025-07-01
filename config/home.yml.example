@@ -1,0 +1,98 @@
+- name: Home
+  columns:
+    - size: small
+      widgets:
+        - type: calendar
+          first-day-of-week: sunday
+
+        - type: rss
+          limit: 10
+          collapse-after: 3
+          cache: 12h
+          feeds:
+            - url: https://selfh.st/rss/
+              title: selfh.st
+              limit: 4
+            - url: https://ciechanow.ski/atom.xml
+            - url: https://www.joshwcomeau.com/rss.xml
+              title: Josh Comeau
+            - url: https://samwho.dev/rss.xml
+            - url: https://ishadeed.com/feed.xml
+              title: Ahmad Shadeed
+
+        - type: twitch-channels
+          channels:
+            - theprimeagen
+
+    - size: full
+      widgets:
+        - type: group
+          widgets:
+            - type: hacker-news
+
+        - type: videos
+          channels:
+            - UCBJycsmduvYEL83R_U4JriQ  # Marques Brownlee
+            - UCsBjURrPoezykLs9EqgamOA  # @Fireshipio
+            - UC8ENHE5xdFSwx71u3fDH5Xw  # @ThePrimeagen
+            - UCajiMK_CY9icRhLepS8_3ug  # Alex Ziskind
+            - UCVhQ2NnY5Rskt6UjCUkJ_DA  # @ArjanCodes
+            - UC-kM5kL9CgjN9s9pim089gg  # @TheAdamConover
+            - UCXuqSBlHAE6Xw-yeJA0Tunw  # Linus Tech Tips
+
+        - type: group
+          widgets:
+            - &reddit-widget
+              type: reddit
+              subreddit: comics
+              show-thumbnails: true
+              app-auth:
+                name: ${REDDIT_APP_NAME}
+                id: ${REDDIT_APP_CLIENT_ID}
+                secret: ${REDDIT_APP_SECRET}
+
+            - <<: *reddit-widget
+              subreddit: MurderedByWords
+
+            - <<: *reddit-widget
+              subreddit: FUCKYOUINPARTICULAR
+
+            - <<: *reddit-widget
+              subreddit: IAmA
+
+            - <<: *reddit-widget
+              subreddit: ClaudeAI
+
+    - size: small
+      widgets:
+        - type: weather
+          location: Oklahoma City, United States
+          units: imperial
+          hour-format: 12h
+
+        - type: markets
+          markets:
+            - symbol: SPY
+              name: S&P 500
+            - symbol: VOO
+              name: VOO
+            - symbol: SMCI
+              name: SMCI
+            - symbol: TSM
+              name: TSM
+            - symbol: ASML
+              name: ASML
+            - symbol: NVDA
+              name: NVIDIA
+            - symbol: AAPL
+              name: Apple
+            - symbol: JOBY
+              name: Joby Aviation
+
+        - type: releases
+          cache: 1d
+          token: ${GITHUB_TOKEN}
+          repositories:
+            - glanceapp/glance
+            - modular/modular
+            - pythoninthegrass/meetup_bot

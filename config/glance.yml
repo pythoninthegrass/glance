@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json
+
+server:
+  port: 8080
+  assets-path: /app/assets
+
+# https://github.com/glanceapp/glance/blob/main/docs/themes.md
+# * Catppuccin Latte
+theme:
+  light: true
+  background-color: 220 23 95
+  contrast-multiplier: 1.0
+  primary-color: 220 91 54
+  positive-color: 109 58 40
+  negative-color: 347 87 44
+  custom-css-file: /assets/user.css
+
+pages:
+  # It's not necessary to create a new file for each page and include it, you can simply
+  # put its contents here, though multiple pages are easier to manage when separated
+  - $include: home.yml
+
+# branding:
+#   custom-footer: |
+#     <p>Powered by <a href="https://github.com/glanceapp/glance">Glance</a></p>
+#   logo-url: /assets/logo.png
+#   favicon-url: /assets/logo.png
+#   app-name: "My Dashboard"
+#   app-icon-url: "/assets/app-icon.png"
+#   app-background-color: "#151519"

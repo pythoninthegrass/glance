@@ -1,0 +1,19 @@
+services:
+  glance:
+    container_name: glance
+    image: glanceapp/glance
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - glance_config:/app/config
+      - glance_assets:/app/assets
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    x-ports:
+      - 8080/https
+
+volumes:
+  glance_config:
+    external: true
+  glance_assets:
+    external: true
