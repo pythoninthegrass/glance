@@ -11,9 +11,12 @@ dotenv: ['.env']
 
 # vars:
 
-# includes:
-#   docker:
-#     taskfile: ./taskfiles/docker.yml
+includes:
+  uc:
+    taskfile: ./taskfiles/uc.yml
+    aliases: ["uncloud"]
+  uv:
+    taskfile: ./taskfiles/uv.yml
 
 tasks:
   default:

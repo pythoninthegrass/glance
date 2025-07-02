@@ -1,0 +1,29 @@
+version: "3.0"
+
+set: ['e', 'u', 'pipefail']
+shopt: ['globstar']
+
+vars:
+
+tasks:
+  install-uc:
+    desc: "Install uc"
+    cmds:
+      - curl -fsS https://get.uncloud.run/install.sh | sh
+    status:
+      - command -v uc 2>/dev/null
+
+  init:
+    desc: "Initialize the cluster"
+    cmds:
+      - uc machine init -h
+    status:
+      - test -d "{{.HOME}}/.config/uncloud/config.yaml"
+
+  ls:
+    desc: "List the machines"
+    deps:
+      - init
+    cmds:
+      - uc machine ls
+    ignore_error: true
