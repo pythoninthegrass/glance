@@ -1,0 +1,7 @@
+- type: releases
+  cache: 1d
+  token: ${GITHUB_TOKEN}
+  repositories:
+    - glanceapp/glance
+    - modular/modular
+    - pythoninthegrass/meetup_bot
