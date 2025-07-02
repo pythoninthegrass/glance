@@ -1,0 +1,323 @@
+- type: group
+  cache: 12h
+  widgets:
+    - &reddit-widget
+      type: reddit
+      subreddit: comics
+      show-thumbnails: true
+      app-auth:
+        name: ${REDDIT_APP_NAME}
+        id: ${REDDIT_APP_CLIENT_ID}
+        secret: ${REDDIT_APP_SECRET}
+
+    - <<: *reddit-widget
+      subreddit: MurderedByWords
+
+    - <<: *reddit-widget
+      subreddit: FUCKYOUINPARTICULAR
+
+    - <<: *reddit-widget
+      subreddit: IAmA
+
+    - <<: *reddit-widget
+      subreddit: ClaudeAI
+
+    - <<: *reddit-widget
+      subreddit: gaming
+
+    - <<: *reddit-widget
+      subreddit: LifeProTips
+
+    - <<: *reddit-widget
+      subreddit: explainlikeimfive
+
+    - <<: *reddit-widget
+      subreddit: oddlysatisfying
+
+    - <<: *reddit-widget
+      subreddit: nextfuckinglevel
+
+    - <<: *reddit-widget
+      subreddit: therewasanattempt
+
+    - <<: *reddit-widget
+      subreddit: ProgrammerHumor
+
+    - <<: *reddit-widget
+      subreddit: webdev
+
+    - <<: *reddit-widget
+      subreddit: linux_gaming
+
+    - <<: *reddit-widget
+      subreddit: IWantToLearn
+
+    - <<: *reddit-widget
+      subreddit: wholesomememes
+
+    - <<: *reddit-widget
+      subreddit: worldnews
+
+    - <<: *reddit-widget
+      subreddit: AfterTheLoop
+
+    - <<: *reddit-widget
+      subreddit: devops
+
+    - <<: *reddit-widget
+      subreddit: docker
+
+    - <<: *reddit-widget
+      subreddit: computerscience
+
+    - <<: *reddit-widget
+      subreddit: bestof
+
+    - <<: *reddit-widget
+      subreddit: AskReddit
+
+    - <<: *reddit-widget
+      subreddit: ApteraMotors
+
+    - <<: *reddit-widget
+      subreddit: bourbon
+
+    - <<: *reddit-widget
+      subreddit: 1Password
+
+    - <<: *reddit-widget
+      subreddit: AdviceAnimals
+
+    - <<: *reddit-widget
+      subreddit: AlpineLinux
+
+    - <<: *reddit-widget
+      subreddit: Android
+
+    - <<: *reddit-widget
+      subreddit: ansible
+
+    - <<: *reddit-widget
+      subreddit: Arduboy
+
+    - <<: *reddit-widget
+      subreddit: archlinux
+
+    - <<: *reddit-widget
+      subreddit: AskHistorians
+
+    - <<: *reddit-widget
+      subreddit: askscience
+
+    - <<: *reddit-widget
+      subreddit: atheism
+
+    - <<: *reddit-widget
+      subreddit: bash
+
+    - <<: *reddit-widget
+      subreddit: churning
+
+    - <<: *reddit-widget
+      subreddit: CloudFlare
+
+    - <<: *reddit-widget
+      subreddit: dating_advice
+
+    - <<: *reddit-widget
+      subreddit: debian
+
+    - <<: *reddit-widget
+      subreddit: DIY
+
+    - <<: *reddit-widget
+      subreddit: django
+
+    - <<: *reddit-widget
+      subreddit: europe
+
+    - <<: *reddit-widget
+      subreddit: Fedora
+
+    - <<: *reddit-widget
+      subreddit: financialindependence
+
+    - <<: *reddit-widget
+      subreddit: framework
+
+    - <<: *reddit-widget
+      subreddit: GetMotivated
+
+    - <<: *reddit-widget
+      subreddit: golang
+
+    - <<: *reddit-widget
+      subreddit: gpdwin
+
+    - <<: *reddit-widget
+      subreddit: hackernews
+
+    - <<: *reddit-widget
+      subreddit: IsItBullshit
+
+    - <<: *reddit-widget
+      subreddit: kubernetes
+
+    - <<: *reddit-widget
+      subreddit: learnprogramming
+
+    - <<: *reddit-widget
+      subreddit: learnpython
+
+    - <<: *reddit-widget
+      subreddit: linux
+
+    - <<: *reddit-widget
+      subreddit: LocalLLaMA
+
+    - <<: *reddit-widget
+      subreddit: mac
+
+    - <<: *reddit-widget
+      subreddit: MacOS
+
+    - <<: *reddit-widget
+      subreddit: macsysadmin
+
+    - <<: *reddit-widget
+      subreddit: minilab
+
+    - <<: *reddit-widget
+      subreddit: MiniPCs
+
+    - <<: *reddit-widget
+      subreddit: MoonlightStreaming
+
+    - <<: *reddit-widget
+      subreddit: MovieDetails
+
+    - <<: *reddit-widget
+      subreddit: networking
+
+    - <<: *reddit-widget
+      subreddit: ollama
+
+    - <<: *reddit-widget
+      subreddit: onivim
+
+    - <<: *reddit-widget
+      subreddit: opensource
+
+    - <<: *reddit-widget
+      subreddit: osx
+
+    - <<: *reddit-widget
+      subreddit: personalfinance
+
+    - <<: *reddit-widget
+      subreddit: pics
+
+    - <<: *reddit-widget
+      subreddit: PikaOS
+
+    - <<: *reddit-widget
+      subreddit: politics
+
+    - <<: *reddit-widget
+      subreddit: productivity
+
+    - <<: *reddit-widget
+      subreddit: programming
+
+    - <<: *reddit-widget
+      subreddit: Python
+
+    - <<: *reddit-widget
+      subreddit: raspberry_pi
+
+    - <<: *reddit-widget
+      subreddit: redhat
+
+    - <<: *reddit-widget
+      subreddit: retrogaming
+
+    - <<: *reddit-widget
+      subreddit: retroid
+
+    - <<: *reddit-widget
+      subreddit: rust
+
+    - <<: *reddit-widget
+      subreddit: SBCGaming
+
+    - <<: *reddit-widget
+      subreddit: science
+
+    - <<: *reddit-widget
+      subreddit: Seattle
+
+    - <<: *reddit-widget
+      subreddit: selfhelp
+
+    - <<: *reddit-widget
+      subreddit: selfhosted
+
+    - <<: *reddit-widget
+      subreddit: selfimprovement
+
+    - <<: *reddit-widget
+      subreddit: shortcuts
+
+    - <<: *reddit-widget
+      subreddit: software
+
+    - <<: *reddit-widget
+      subreddit: SteamDeck
+
+    - <<: *reddit-widget
+      subreddit: synology
+
+    - <<: *reddit-widget
+      subreddit: sysadmin
+
+    - <<: *reddit-widget
+      subreddit: technology
+
+    - <<: *reddit-widget
+      subreddit: Terraform
+
+    - <<: *reddit-widget
+      subreddit: ThSw
+
+    - <<: *reddit-widget
+      subreddit: todayilearned
+
+    - <<: *reddit-widget
+      subreddit: TooAfraidToAsk
+
+    - <<: *reddit-widget
+      subreddit: trippinthroughtime
+
+    - <<: *reddit-widget
+      subreddit: unixporn
+
+    - <<: *reddit-widget
+      subreddit: UpNote_App
+
+    - <<: *reddit-widget
+      subreddit: UpliftingNews
+
+    - <<: *reddit-widget
+      subreddit: UTMapp
+
+    - <<: *reddit-widget
+      subreddit: VitaPiracy
+
+    - <<: *reddit-widget
+      subreddit: YouShouldKnow
+
+    - <<: *reddit-widget
+      subreddit: ZedEditor
+
+    - <<: *reddit-widget
+      subreddit: Zig

@@ -1,0 +1,18 @@
+- type: markets
+  markets:
+    - symbol: SPY
+      name: S&P 500
+    - symbol: VOO
+      name: VOO
+    - symbol: SMCI
+      name: SMCI
+    - symbol: TSM
+      name: TSM
+    - symbol: ASML
+      name: ASML
+    - symbol: NVDA
+      name: NVIDIA
+    - symbol: AAPL
+      name: Apple
+    - symbol: JOBY
+      name: Joby Aviation
