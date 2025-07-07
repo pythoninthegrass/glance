@@ -10,7 +10,7 @@ services:
       - glance_assets:/app/assets
       - /var/run/docker.sock:/var/run/docker.sock:ro
     x-ports:
-      - 8080/https
+      - ${FQDN:+${FQDN}:}8080/https
 
 volumes:
   glance_config:
