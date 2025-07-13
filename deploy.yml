@@ -2,6 +2,7 @@
 - name: Deploy working directory to remote server
   hosts: servers
   gather_facts: true
+  # TODO: add env/vars
   tasks:
     - name: Create git directory
       ansible.builtin.file:
@@ -54,6 +55,7 @@
         cmd: uc rm glance
       ignore_errors: true
 
+    # TODO: test w/o .env sourcing
     - name: Deploy glance service
       ansible.builtin.expect:
         command:
