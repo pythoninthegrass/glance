@@ -1,7 +1,8 @@
 - type: rss
-  limit: 15
-  collapse-after: 5
+  collapse-after: 6
+  limit: 20
   cache: 12h
+  style: vertical-list
   feeds:
     - url: https://rss.app/feeds/hduqjWEyujKjSLFU.xml
       title: Inverse
