@@ -20,11 +20,11 @@ pages:
   # put its contents here, though multiple pages are easier to manage when separated
   - $include: home.yml
 
-# branding:
-#   custom-footer: |
-#     <p>Powered by <a href="https://github.com/glanceapp/glance">Glance</a></p>
-#   logo-url: /assets/logo.png
-#   favicon-url: /assets/logo.png
-#   app-name: "My Dashboard"
-#   app-icon-url: "/assets/app-icon.png"
-#   app-background-color: "#151519"
+branding:
+  custom-footer: |
+    <p>Because <a href="https://upstract.com" target="_blank">Upstract</a> is ugly and I like turtles 💀 🐢</p>
+  logo-url: /assets/butterfly.png
+  favicon-url: /assets/favicon.ico
+  app-name: "popurls.xyz"
+  # app-icon-url: "/assets/app-icon.png"
+  # app-background-color: "#151519"
