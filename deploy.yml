@@ -97,15 +97,3 @@
       args:
         executable: /bin/bash
       when: assets_dir.stat.exists
-
-    - name: Find glance container ID
-      ansible.builtin.shell:
-        cmd: docker ps --filter "name=glance-" --format "{{ '{{.ID}}' }}"
-      register: glance_container_id
-      changed_when: false
-
-    - name: Restart glance container
-      ansible.builtin.command:
-        cmd: docker restart {{ glance_container_id.stdout }}
-      when: glance_container_id.stdout != ""
-      changed_when: true
