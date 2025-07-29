@@ -12,10 +12,12 @@
       title: Time Extension
     - url: https://www.theverge.com/rss/partner/subscriber-only-full-feed/rss.xml
       title: The Verge
+    - url: https://holdtherobot.com/blog/rss.xml
+      title: Hold the Robot
     - url: https://electrek.co/feed
       title: Electrek
     - url: https://www.pcmag.com/feeds/rss/latest
-      title: PC Magagzine
+      title: PC Magazine
     - url: https://www.wired.com/feed/rss
       title: Wired
     - url: https://www.theatlantic.com/feed/all/
