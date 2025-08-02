@@ -1,7 +1,30 @@
 - type: rss
-  limit: 10
-  collapse-after: 3
+  collapse-after: 6
+  limit: 20
   cache: 12h
+  style: vertical-list
   feeds:
+    - url: https://rss.app/feeds/hduqjWEyujKjSLFU.xml
+      title: Inverse
     - url: https://selfh.st/rss/
       title: selfh.st
+    - url: https://rss.app/feeds/bfMDGp1eFuIYj0SJ.xml
+      title: Time Extension
+    - url: https://www.theverge.com/rss/partner/subscriber-only-full-feed/rss.xml
+      title: The Verge
+    - url: https://holdtherobot.com/blog/rss.xml
+      title: Hold the Robot
+    - url: https://electrek.co/feed
+      title: Electrek
+    - url: https://www.pcmag.com/feeds/rss/latest
+      title: PC Magazine
+    - url: https://www.wired.com/feed/rss
+      title: Wired
+    - url: https://www.theatlantic.com/feed/all/
+      title: The Atlantic
+    - url: https://www.vox.com/rss/index.xml
+      title: Vox
+    - url: https://rss.app/feeds/OqcaWF1AZo4RmPyB.xml
+      title: AP - US News
+    - url: https://rss.app/feeds/yPesgfLNjy2GRjxc.xml
+      title: AP - Politics

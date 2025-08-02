@@ -1,0 +1,25 @@
+- name: Home
+  columns:
+    - size: small
+      widgets:
+        - type: calendar
+          first-day-of-week: sunday
+        - type: hacker-news
+          collapse-after: 3
+          limit: 15
+        - $include: repos.yml
+
+    - size: full
+      widgets:
+        - $include: rss.yml
+        - $include: videos.yml
+        - $include: reddit.yml
+
+    - size: small
+      widgets:
+        - type: weather
+          location: Oklahoma City, United States
+          units: imperial
+          hour-format: 12h
+        - $include: stocks.yml
+        - $include: twitch.yml

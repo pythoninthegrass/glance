@@ -1,7 +1,6 @@
 # ETC
 facts/*
 *.env*
-home.yml
 hosts
 
 # General

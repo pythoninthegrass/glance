@@ -1,0 +1,13 @@
+- type: releases
+  cache: 1d
+  token: ${GITHUB_TOKEN}
+  repositories:
+    - psviderski/uncloud
+    - glanceapp/glance
+    - modular/modular
+
+- type: repository
+  repository: pythoninthegrass/meetup_bot
+  commits-limit: 1
+  pull-requests-limit: 1
+  issues-limit: 1
