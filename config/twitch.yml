@@ -1,3 +1,5 @@
 - type: twitch-channels
   channels:
     - theprimeagen
+    - AlSweigart
+    - noopkat
