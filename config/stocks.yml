@@ -4,6 +4,8 @@
       name: S&P 500
     - symbol: VOO
       name: VOO
+    - symbol: VTI
+      name: VTI
     - symbol: SMCI
       name: SMCI
     - symbol: TSM
