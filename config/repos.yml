@@ -3,7 +3,7 @@
   token: ${GITHUB_TOKEN}
   repositories:
     - psviderski/uncloud
-    - glanceapp/glance
+    - charmbracelet/crush
     - modular/modular
 
 - type: repository
