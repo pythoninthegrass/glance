@@ -16,5 +16,7 @@
       name: NVIDIA
     - symbol: AAPL
       name: Apple
+    - symbol: ACHR
+      name: Archer Aviation
     - symbol: JOBY
       name: Joby Aviation
