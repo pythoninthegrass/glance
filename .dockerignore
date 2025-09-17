@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+AGENTS.md
+TODO.md
+*.md
+
+# Development files
+.env.example
+taskfile.yml
+taskfiles/
+docker-bake.hcl
+Dockerfile
+docker-compose.yml
+compose.yml
+
+# CI/CD
+.github/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*~
