@@ -1,4 +1,5 @@
 # ETC
+CLAUDE.md
 facts/*
 *.env*
 hosts

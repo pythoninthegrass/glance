@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to LLMs when working with code in this repository.
 
 ## Commands
 
@@ -74,6 +74,10 @@ The configuration uses YAML anchors and references (`&reddit-props`, `<<: *reddi
 - <https://docs.dnscontrol.org/>
 - <https://docs.ansible.com/>
 - <https://taskfile.dev/>
+
+## Context7 Libraries
+
+- glanceapp/glance
 
 ## Memories
 
