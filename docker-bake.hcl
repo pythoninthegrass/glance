@@ -58,10 +58,6 @@ target "build" {
     REDDIT_APP_CLIENT_SECRET = REDDIT_APP_CLIENT_SECRET
     MY_SECRET_TOKEN = MY_SECRET_TOKEN
   }
-  // Secrets for build-time access (not embedded in image)
-  secret = [
-    "id=_env,src=.env"
-  ]
   // Output image will be pushed if push=true is set in GitHub Actions
 }
 
@@ -95,21 +91,12 @@ target "arm64" {
 target "dev" {
   inherits = ["build"]
   tags = ["${REGISTRY}/${IMAGE_NAME}:dev"]
-  secret = [
-    "id=_env,src=.env"
-  ]
 }
 
 // Production build with external secrets
 target "prod" {
   inherits = ["build"]
   tags = ["${REGISTRY}/${IMAGE_NAME}:prod"]
-  secret = [
-    "id=github_token,env=GITHUB_TOKEN",
-    "id=reddit_client_id,env=REDDIT_APP_CLIENT_ID",
-    "id=reddit_secret,env=REDDIT_APP_CLIENT_SECRET",
-    "id=my_secret,env=MY_SECRET_TOKEN"
-  ]
 }
 
 // Matrix build target if you prefer to use it directly in bake

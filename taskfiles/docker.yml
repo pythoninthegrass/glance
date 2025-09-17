@@ -268,5 +268,11 @@ tasks:
 
         docker buildx bake \
           --file docker-bake.hcl \
+          --set build.args.FQDN="{{.FQDN}}" \
+          --set build.args.GITHUB_TOKEN="{{.GITHUB_TOKEN}}" \
+          --set build.args.REDDIT_APP_NAME="{{.REDDIT_APP_NAME}}" \
+          --set build.args.REDDIT_APP_CLIENT_ID="{{.REDDIT_APP_CLIENT_ID}}" \
+          --set build.args.REDDIT_APP_CLIENT_SECRET="{{.REDDIT_APP_CLIENT_SECRET}}" \
+          --set build.args.MY_SECRET_TOKEN="{{.MY_SECRET_TOKEN}}" \
           $TARGET \
           --load
