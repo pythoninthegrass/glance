@@ -1,7 +1,8 @@
 # ETC
+.task/
+*.env*
 CLAUDE.md
 facts/*
-*.env*
 hosts
 
 # General

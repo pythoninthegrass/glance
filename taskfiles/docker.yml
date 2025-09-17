@@ -1,0 +1,272 @@
+version: "3.0"
+
+set: ['e', 'u', 'pipefail']
+shopt: ['globstar']
+
+vars:
+  COMPOSE_FILE: '{{.COMPOSE_FILE | default (printf "%s/compose.yml" .ROOT_DIR)}}'
+  COMPOSE_REMOVE_ORPHANS: '{{.COMPOSE_REMOVE_ORPHANS | default "true"}}'
+  DOCKERFILE: '{{.DOCKERFILE | default (printf "%s/Dockerfile" .ROOT_DIR)}}'
+  ARCH: '{{.ARCH | default "linux/amd64"}}'
+  REGISTRY: '{{.REGISTRY | default "ghcr.io"}}'
+  USER_NAME: '{{.USER_NAME | default "glance"}}'
+  SERVICE: '{{.SERVICE | default "glance"}}'
+  VERSION: '{{.VERSION | default "latest"}}'
+
+tasks:
+  net:
+    desc: "Create docker network"
+    cmds:
+      - |
+        docker network create \
+          --driver bridge \
+          app-tier
+    status:
+      - |
+        docker network ls --format \{\{.Name\}\} \
+          | grep -q '^app-tier$'
+
+  vol:
+    desc: "Create docker volume"
+    cmds:
+      - |
+        docker volume create \
+          --driver local \
+          {{.SERVICE}}-vol
+    status:
+      - |
+        docker volume ls --format \{\{.Name\}\} \
+          | grep -q '^{{.SERVICE}}-vol$'
+
+  build:
+    desc: "Build Docker image with secrets"
+    summary: |
+      Build the docker image with secrets from .env file.
+
+      Uses fingerprinting to automatically rebuild when config files change.
+
+      The default dockerfile is `Dockerfile`.
+
+      USAGE
+        task docker:build
+    sources:
+      - Dockerfile
+      - config/**/*
+      - assets/**/*
+      - .env
+    generates:
+      - docker-image:{{.SERVICE}}:latest
+    cmds:
+      - |
+        docker build \
+          --secret id=_env,src=.env \
+          --build-arg FQDN="{{.FQDN}}" \
+          --build-arg GITHUB_TOKEN="{{.GITHUB_TOKEN}}" \
+          --build-arg REDDIT_APP_NAME="{{.REDDIT_APP_NAME}}" \
+          --build-arg REDDIT_APP_CLIENT_ID="{{.REDDIT_APP_CLIENT_ID}}" \
+          --build-arg REDDIT_APP_CLIENT_SECRET="{{.REDDIT_APP_CLIENT_SECRET}}" \
+          --build-arg MY_SECRET_TOKEN="{{.MY_SECRET_TOKEN}}" \
+          -t {{.SERVICE}}:latest \
+          .
+
+  build-bake:
+    desc: "Build with Docker Bake (secrets from .env)"
+    summary: |
+      Build using Docker Bake with secrets from .env file.
+
+      Uses fingerprinting to automatically rebuild when config files change.
+
+      USAGE
+        task docker:build-bake
+    sources:
+      - docker-bake.hcl
+      - Dockerfile
+      - config/**/*
+      - assets/**/*
+      - .env
+    generates:
+      - docker-image:{{.SERVICE}}:latest
+    cmds:
+      - docker buildx bake --load
+
+  build-dev:
+    desc: "Build development image with .env secrets"
+    summary: |
+      Build development image using Docker Bake with .env secrets.
+
+      Uses fingerprinting to automatically rebuild when config files change.
+
+      USAGE
+        task docker:build-dev
+    sources:
+      - docker-bake.hcl
+      - Dockerfile
+      - config/**/*
+      - assets/**/*
+      - .env
+    generates:
+      - docker-image:{{.SERVICE}}:dev
+    cmds:
+      - docker buildx bake dev --load
+
+  build-prod:
+    desc: "Build production image with external secrets"
+    summary: |
+      Build production image using Docker Bake with external secrets.
+
+      Uses fingerprinting to automatically rebuild when config files change.
+
+      USAGE
+        task docker:build-prod
+    sources:
+      - docker-bake.hcl
+      - Dockerfile
+      - config/**/*
+      - assets/**/*
+      - .env
+    generates:
+      - docker-image:{{.SERVICE}}:prod
+    cmds:
+      - docker buildx bake prod --load
+
+  login:
+    desc: "Login to the container registry"
+    cmds:
+      - |
+        echo "{{.REGISTRY_PASS}}" | docker login \
+          -u {{.USER_NAME}} \
+          --password-stdin {{.REGISTRY_URL}}
+    run: once
+    silent: true
+    status:
+      - |
+        jq -e '.auths | keys[] | select(contains("{{.REGISTRY_URL}}"))' ~/.docker/config.json
+
+  push:
+    desc: "Push the docker image to the registry"
+    deps:
+      - login
+      - build
+    cmds:
+      - docker push {{.REGISTRY_URL}}/{{.USER_NAME}}/{{.SERVICE}}
+
+  up:
+    desc: "Start the project with docker compose"
+    cmds:
+      - |
+        docker compose -f {{.COMPOSE_FILE}} up -d \
+        --build \
+        --remove-orphans
+
+  exec:
+    desc: "Shell into a running container"
+    cmds:
+      - docker exec -it {{.SERVICE}} sh
+
+  logs:
+    desc: "Follow the logs of a running container"
+    cmds:
+      - docker compose logs -tf {{.SERVICE}}
+
+  stop:
+    desc: "Stop the project with docker compose"
+    cmds:
+      - docker compose -f {{.COMPOSE_FILE}} stop
+
+  down:
+    desc: "Stop and remove containers, networks, and volumes with docker compose"
+    cmds:
+      - |
+        docker compose -f {{.COMPOSE_FILE}} down \
+        --volumes
+
+  prune:
+    desc: "Prune docker"
+    cmds:
+      - docker system prune --all --force
+      - docker builder prune --all --force
+
+  create-builder:
+    desc: "Create a local docker buildx builder"
+    cmds:
+      - |
+        docker buildx create \
+          --name multi-platform \
+          --node multi-platform \
+          --platform linux/arm64/v8,linux/amd64 \
+          --driver=docker-container \
+          --use \
+          --bootstrap
+    status:
+      - docker buildx inspect multi-platform > /dev/null 2>&1
+
+  validate:
+    desc: Validate the docker-bake.hcl file
+    vars:
+      BAKE_OUTPUT:
+        sh: docker buildx bake --file docker-bake.hcl --print 2>&1 || true
+      VALIDATION_ERROR:
+        sh: echo "{{.BAKE_OUTPUT}}" | grep -q "ERROR:" && echo "true" || echo "false"
+    preconditions:
+      - sh: "test {{.VALIDATION_ERROR}} = false"
+        msg: |
+          Docker bake file is invalid. Error details:
+          {{.BAKE_OUTPUT}}
+    cmds:
+      - cmd: echo "Docker bake file is valid"
+        silent: true
+
+  buildx:
+    desc: "Build using docker buildx bake"
+    summary: |
+      Build using docker buildx bake with the specified target.
+
+      Uses fingerprinting to automatically rebuild when config files change.
+
+      AVAILABLE TARGETS
+        - build (default): Builds the main image
+        - dev: Builds development image with .env secrets
+        - prod: Builds production image with external secrets
+        - amd64: Builds specifically for AMD64 platform
+        - arm64: Builds specifically for ARM64 platform
+        - multi-platform: Builds for both AMD64 and ARM64 platforms
+
+      USAGE
+        task docker:buildx
+        task docker:buildx -- dev
+        task docker:buildx -- prod
+        task docker:buildx -- amd64
+        task docker:buildx -- arm64
+        task docker:buildx -- multi-platform
+    deps:
+      - validate
+      - create-builder
+    sources:
+      - docker-bake.hcl
+      - Dockerfile
+      - config/**/*
+      - assets/**/*
+      - .env
+    generates:
+      - docker-image:{{.SERVICE}}:latest
+    cmds:
+      - |
+        if [ -z "{{.CLI_ARGS}}" ]; then
+          TARGET="build"
+        else
+          case "{{.CLI_ARGS}}" in
+            build|dev|prod|amd64|arm64|multi-platform)
+              TARGET="{{.CLI_ARGS}}"
+              ;;
+            *)
+              echo "Error: Invalid target '{{.CLI_ARGS}}'"
+              echo "Valid targets are: build, dev, prod, amd64, arm64, multi-platform"
+              exit 1
+              ;;
+          esac
+        fi
+
+        docker buildx bake \
+          --file docker-bake.hcl \
+          $TARGET \
+          --load

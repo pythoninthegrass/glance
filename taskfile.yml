@@ -12,6 +12,8 @@ dotenv: ['.env']
 # vars:
 
 includes:
+  docker:
+    taskfile: ./taskfiles/docker.yml
   uc:
     taskfile: ./taskfiles/uc.yml
     aliases: ["uncloud"]
@@ -55,3 +57,5 @@ tasks:
       INSTALL_DIR: "{{.HOME}}/.local/bin"
     status:
       - command -v devbox 2>/dev/null
+
+
