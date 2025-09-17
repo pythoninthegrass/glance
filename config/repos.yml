@@ -2,8 +2,8 @@
   cache: 1d
   token: ${GITHUB_TOKEN}
   repositories:
+    - sst/opencode
     - psviderski/uncloud
-    - charmbracelet/crush
     - modular/modular
 
 - type: repository
