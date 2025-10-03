@@ -2,8 +2,6 @@
 .task/
 *.env*
 CLAUDE.md
-facts/*
-hosts
 
 # General
 .DS_Store

@@ -14,11 +14,6 @@ dotenv: ['.env']
 includes:
   docker:
     taskfile: ./taskfiles/docker.yml
-  uc:
-    taskfile: ./taskfiles/uc.yml
-    aliases: ["uncloud"]
-  uv:
-    taskfile: ./taskfiles/uv.yml
 
 tasks:
   default:
@@ -40,11 +35,6 @@ tasks:
         echo "    MY_SECRET_TOKEN: {{.MY_SECRET_TOKEN}}"
         echo "    WORKING_DIR: {{.WORKING_DIR}}"
     silent: true
-
-  deploy:
-    desc: "Deploy glance"
-    cmds:
-      - ansible-playbook deploy.yml -vvv
 
   install-devbox:
     desc: "Install devbox"

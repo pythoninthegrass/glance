@@ -8,7 +8,6 @@ This project uses Task (Taskfile) for task automation:
 
 - `task` or `task default` - Lists all available tasks
 - `task debug` - Shows debugging information including environment variables
-- `task deploy` - Deploys glance using Ansible playbook
 - `task install-devbox` - Installs devbox tool (runs once)
 - `task docker:build` - Build Docker image with secrets from .env file (with fingerprinting)
 - `task docker:build-bake` - Build with Docker Bake (uses docker-bake.hcl configuration, with fingerprinting)
@@ -82,9 +81,6 @@ This is a Glance dashboard configuration repository with deployment automation:
 
 ### Deployment
 
-- Uses Ansible for automated deployment to remote servers
-- `deploy.yml` - Ansible playbook that syncs files to remote server and deploys via Uncloud
-- `hosts` - Ansible inventory with server configurations
 - `compose.yml`/`docker-compose.yml` - Docker Compose configuration for Glance container
 - `docker-bake.hcl` - Docker Bake configuration for multi-platform builds with secrets
 - Docker builds support secrets via `--secret` flag and `.env` file for secure credential handling
@@ -105,7 +101,6 @@ The configuration uses YAML anchors and references (`&reddit-props`, `<<: *reddi
 - Use these tools for linting and formatting
   - editorconfig 
   - `markdownlint -c .markdownlint.jsonc` 
-  - `ansible-lint`
   - ALWAYS add an EOF (trailing newline) regardless of extension
 - Test reddit app configuration on remote server via
     ```bash 
@@ -118,24 +113,14 @@ The configuration uses YAML anchors and references (`&reddit-props`, `<<: *reddi
         -d "grant_type=client_credentials"
     ```
 
-## Documentation URLs
-
-- <https://github.com/psviderski/uncloud-dns>
-- <https://github.com/psviderski/unregistry>
 
 ## Context7 Libraries
 
 - glanceapp/glance
 - docker/docs
-- psviderski/uncloud
 - stackexchange/dnscontrol
-- websites/ansible_ansible
 - websites/taskfile_dev
 
 ## Memories
 
 - vps is running debian 12
-- uc uses compose.yml; notably with the custom x-ports directive
-- volumes were created on the vps via `uc volume`:
-  - `uc volume create glance_config` 
-  - `uc volume create glance_assets` 
