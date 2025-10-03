@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.17.1
+# syntax=docker/dockerfile:1.19.0
 # check=skip=all
 
 FROM glanceapp/glance:latest
