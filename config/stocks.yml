@@ -6,17 +6,15 @@
       name: VOO
     - symbol: VTI
       name: VTI
-    - symbol: SMCI
-      name: SMCI
     - symbol: TSM
       name: TSM
     - symbol: ASML
       name: ASML
-    - symbol: NVDA
-      name: NVIDIA
-    - symbol: AAPL
-      name: Apple
     - symbol: ACHR
       name: Archer Aviation
     - symbol: JOBY
       name: Joby Aviation
+    - symbol: V
+      name: V
+    - symbol: SMCI
+      name: SMCI
